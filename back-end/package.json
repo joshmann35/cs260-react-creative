@@ -1,0 +1,16 @@
+{
+  "name": "react-creative-server",
+  "version": "1.0.0",
+  "description": "Server for React Creative Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Josh Mann",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^4.12.0",
+    "mongoose": "^6.7.2"
+  }
+}
