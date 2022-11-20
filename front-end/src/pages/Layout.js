@@ -9,7 +9,7 @@ class Layout extends React.Component {
         super(props);
         console.log(window.location.pathname);
         this.state = {links: [
-            {path: "/react-creative/build/", text: "Home", isActive: true},
+            {path: "/react-creative/front-end/build/", text: "Home", isActive: true},
             {path: "store", text: "Store", isActive: false},
             {path: "gallery", text: "Gallery", isActive: false},
             {path: "about", text: "About", isActive: false},
@@ -30,7 +30,7 @@ class Layout extends React.Component {
             <div className="body">
             <div className="main">
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top justify-content-between">
-                    <Link className="navbar-brand" to="/react-creative/build/" onClick={() => this.handleClick(0)}><img src={Logo} /></Link>
+                    <Link className="navbar-brand" to="/react-creative/front-end/build/" onClick={() => this.handleClick(0)}><img src={Logo} /></Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -53,7 +53,7 @@ class Layout extends React.Component {
             </div>
             <footer>
                 Copyright 2022<br />
-                <a href="https://github.com/joshmann35/cs260-creative"><i className="fa fa-github"></i></a>
+                <a href="https://github.com/joshmann35/cs260-react-creative"><i className="fa fa-github"></i></a>
                 <a href="https://www.instagram.com/cottonwoodringco"><i className="fa fa-instagram"></i></a>
                 <a href="https://www.facebook.com/cottonwoodringco"><i className="fa fa-facebook"></i></a>
                 <p>For CS260 Creative Project</p>

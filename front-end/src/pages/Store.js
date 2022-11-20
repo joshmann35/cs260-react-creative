@@ -1,12 +1,26 @@
-import MalachiteRing from "../../src/images/1.jpeg";
-import OffsetRing from "../../src/images/2.jpg";
-import MysteryRing from "../../src/images/3.jpg";
-import AmberRing from "../../src/images/4.jpg";
-import AmethystRing from "../../src/images/5.jpg";
-import FluoriteRing from "../../src/images/6.jpg";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Store = () => {
+    
+    const [products, setProducts] = useState([]);
+    const [error, setError] = useState("");
+    
+    const fetchProducts = async () => {
+        try {
+            const response = await axios.get("/api/rings");
+            setProducts(response.data);
+        }
+        catch (error) {
+            setError("Error fetching products: " + error);
+        }
+    };
+    
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+    
     return (
         <div className="store">
             <div className="sidebar">
@@ -34,55 +48,24 @@ const Store = () => {
 
             </div>
             <div className="shop-grid">
+                <p>{error}</p>
+                {products.map(product => (
+                    <div key={product._id} className="shop-item">
+                        <Link to={"/react-creative/front-end/build/product/" + product._id}>
+                            <img src={product.image}/>
+                            <h2>{product.name}</h2>
+                            <h2>{product.price}</h2>
+                        </Link>
+                    </div>
+                ))}
                 <div className="shop-item">
-                    <Link to="/react-creative/build/product">
-                        <img src={MalachiteRing}/>
-                        <h2>Malachite Ring</h2>
-                        <div className="sale">
-                            <h2 className="old-sale-price">$70</h2>
-                            <h2 className="sale-price"> $60</h2>
-                            <h2 className="sale-text">SALE</h2>
-                        </div>
-                    </Link>
-                </div>
-                <div className="shop-item">
-                    <Link to="/react-creative/build/product">
-                        <img src={OffsetRing}/>
-                        <h2>Offset Ring</h2>
-                        <h2>$70</h2>
-                    </Link>
-                </div>
-                <div className="shop-item">
-                    <Link to="/react-creative/build/product">
-                        <img src={MysteryRing}/>
-                        <h2>Mystery Ring</h2>
-                        <h2>$70</h2>
-                    </Link>
-                </div>
-                <div className="shop-item">
-                    <Link to="/react-creative/build/product">
-                        <img src={AmberRing}/>
-                        <h2>Amber Ring</h2>
-                        <h2>$70</h2>
-                    </Link>
-                </div>
-                <div className="shop-item">
-                    <Link to="/react-creative/build/product">
-                        <img src={AmethystRing}/>
-                        <h2>Amethyst Ring</h2>
-                        <h2>$70</h2>
-                    </Link>
-                </div>
-                <div className="shop-item">
-                    <Link to="/react-creative/build/product">
-                        <img src={FluoriteRing}/>
-                        <h2>Fluorite Ring</h2>
-                        <h2>$70</h2>
+                    <Link to={"/react-creative/front-end/build/newProduct"}>
+                        <h2>Add new product</h2>
                     </Link>
                 </div>
             </div>
             <div className="sidebar"></div>
         </div>
-    )
-}
-export default Store
+    );
+};
+export default Store;

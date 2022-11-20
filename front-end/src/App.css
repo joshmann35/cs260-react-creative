@@ -298,6 +298,10 @@ footer a {
     text-align: center;
 }
 
+select, option, input {
+    color: black;
+}
+
 @media only screen and (min-width: 1000px) {
     .about-container {
         flex-direction: row-reverse;

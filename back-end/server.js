@@ -16,59 +16,60 @@ mongoose.connect('mongodb://localhost:27017/creative', {
 });
 
 // Schemas
-const ringSchema = new mongoose.Schema({
-    name: String,
-    blank: blankSchema,
-    width: widthSchema,
-    size: sizeSchema,
-    material: materialSchema,
-    stones: [stoneSchema],
-    color: String,
-    glow: glowSchema,
-    description: String
-});
-
-const blankSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    widths: [widthSchema],
-    sizes: [sizeSchema],
-    materials: [materialSchema],
-    description: String
-});
-
 const widthSchema = new mongoose.Schema({
     width: String,
     description: String
 });
+const Widths = mongoose.model('Widths', widthSchema, 'widths');
 
 const sizeSchema = new mongoose.Schema({
     size: String
 });
+const Sizes = mongoose.model('Sizes', sizeSchema, 'sizes');
 
 const materialSchema = new mongoose.Schema({
     name: String,
     description: String
 });
+const Materials = mongoose.model('Materials', materialSchema, 'materials');
 
 const stoneSchema = new mongoose.Schema({
     name: String,
     description: String
 });
+const Stones = mongoose.model('Stones', stoneSchema, 'stones');
 
 const glowSchema = new mongoose.Schema({
     color: String,
     description: String
 });
+const Glows = mongoose.model('Glows', glowSchema, 'glows');
+
+const blankSchema = new mongoose.Schema({
+    name: String,
+    image: String,
+    widths: [{type: mongoose.Schema.Types.ObjectId, ref: 'Widths'}],
+    sizes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Sizes'}],
+    materials: [{type: mongoose.Schema.Types.ObjectId, ref: 'Materials'}],
+    description: String
+});
+const Blanks = mongoose.model('Blanks', blankSchema, 'blanks');
+
+const ringSchema = new mongoose.Schema({
+    name: String,
+    price: Number,
+    blank: {type: mongoose.Schema.Types.ObjectId, ref: 'Blanks'},
+    width: {type: mongoose.Schema.Types.ObjectId, ref: 'Widths'},
+    size: {type: mongoose.Schema.Types.ObjectId, ref: 'Sizes'},
+    material: {type: mongoose.Schema.Types.ObjectId, ref: 'Materials'},
+    stones: [{type: mongoose.Schema.Types.ObjectId, ref: 'Stones'}],
+    color: String,
+    glow: {type: mongoose.Schema.Types.ObjectId, ref: 'Glows'},
+    description: String
+});
+const Rings = mongoose.model('Rings', ringSchema, 'rings');
 
 // Models
-const Rings = mongoose.model('Ring', ringSchema);
-const Blanks = mongoose.model('Blank', blankSchema);
-const Widths = mongoose.model('Width', widthSchema);
-const Sizes = mongoose.model('Size', sizeSchema);
-const Materials = mongoose.model('Material', materialSchema);
-const Stones = mongoose.model('Stone', stoneSchema);
-const Glows = mongoose.model('Glow', glowSchema);
 
 // Ring API
 app.get("/api/rings", async (req, res) => {
@@ -84,7 +85,11 @@ app.get("/api/rings", async (req, res) => {
 
 app.get("/api/rings/:id", async (req, res) => {
     try {
-        let ring = await Rings.findById(req.params.id);
+        let ring = await Rings.findById(req.params.id)
+            .populate({ path: 'blank', populate: { path: 'widths' } })
+            .populate({ path: 'blank', populate: { path: 'sizes' } })
+            .populate({ path: 'blank', populate: { path: 'materials' } });
+        // console.log(JSON.stringify(ring));
         res.send(ring);
     }
     catch (error) {
@@ -97,6 +102,7 @@ app.post("/api/rings", async (req, res) => {
     try {
         let ring = new Rings({
             name: req.body.name,
+            price: req.body.price,
             blank: req.body.blank,
             width: req.body.width,
             size: req.body.size,
@@ -120,6 +126,7 @@ app.put("/api/rings/:id", async (req, res) => {
         let ring = Rings.findById(req.params.id);
         if (ring) {
             ring.name = req.body.name;
+            ring.price = req.body.price;
             ring.blank = req.body.blank;
             ring.width = req.body.width;
             ring.size = req.body.size;
