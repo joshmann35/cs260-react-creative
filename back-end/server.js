@@ -594,6 +594,24 @@ app.delete("/api/glows/:id", async (req, res) => {
     }
 });
 
+// Clear Database
+app.delete("/api/clear", async (req, res) => {
+    try {
+        await Widths.deleteMany({});
+        await Sizes.deleteMany({});
+        await Materials.deleteMany({});
+        await Stones.deleteMany({});
+        await Glows.deleteMany({});
+        await Blanks.deleteMany({});
+        await Rings.deleteMany({});
+        res.sendStatus(200);
+    }
+    catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+
 
 // Server Start
 app.listen(3000, () => console.log('Server listening on port 3000!'));

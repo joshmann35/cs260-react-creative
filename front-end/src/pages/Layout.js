@@ -10,10 +10,11 @@ class Layout extends React.Component {
         console.log(window.location.pathname);
         this.state = {links: [
             {path: "/react-creative/front-end/build/", text: "Home", isActive: true},
-            {path: "store", text: "Store", isActive: false},
-            {path: "gallery", text: "Gallery", isActive: false},
-            {path: "about", text: "About", isActive: false},
-            {path: "cart", text: "", isActive: false},
+            {path: "/react-creative/front-end/build/store", text: "Store", isActive: false},
+            {path: "/react-creative/front-end/build/custom", text: "Create", isActive: false},
+            {path: "/react-creative/front-end/build/gallery", text: "Gallery", isActive: false},
+            {path: "/react-creative/front-end/build/about", text: "About", isActive: false},
+            {path: "/react-creative/front-end/build/cart", text: "", isActive: false},
         ]};
     }
     
@@ -69,7 +70,7 @@ class NavLink extends React.Component {
             <li className={"nav-item my-auto " + (this.props.isActive ? "active": "")}>
                 <Link 
                     className="nav-link"
-                    activeClassName="active"
+                    activeclassname="active"
                     to={this.props.path}
                     onClick={() => this.props.onClick()}
                 >

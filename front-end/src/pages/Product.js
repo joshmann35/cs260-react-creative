@@ -7,7 +7,7 @@ import axios from "axios";
 const Product = () => {
     const { id } = useParams();
     const [bgImg, setBgImg] = useState("");
-    const [product, setProduct] = useState({name: "", price: "", description: "", blank: {sizes: [], widths: []}});
+    const [product, setProduct] = useState({name: "", image: "", price: "", description: "", blank: {sizes: [], widths: []}});
     const [error, setError] = useState("");
     const fetchProduct = async (id) => {
         try {
@@ -44,7 +44,10 @@ const Product = () => {
                     <p>{error}</p>
                     <div className="product">
                         <div id="custom-container">
-                            <img src={product.image}/>
+                            {product.image != "" ? 
+                                <img src={product.image}/> :
+                                <img src={CustomRing}/>
+                            }
                         </div>
                         <div className="details">
                             <h2>{product.name}</h2>

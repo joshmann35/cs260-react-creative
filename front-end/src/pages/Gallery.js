@@ -12,16 +12,16 @@ import img10 from "../../src/images/10.jpg";
 const Gallery = () => {
     return(
         <div className="gallery">
-            <div className="image-container"><img src={img1} alt="Picture of Rings" /></div>
-            <div className="image-container"><img src={img2} alt="Picture of Rings" /></div>
-            <div className="image-container"><img src={img3} alt="Picture of Rings" /></div>
-            <div className="image-container"><img src={img4} alt="Picture of Rings" /></div>
-            <div className="image-container"><img src={img5} alt="Picture of Rings" /></div>
-            <div className="image-container"><img src={img6} alt="Picture of Rings" /></div>
-            <div className="image-container"><img src={img7} alt="Picture of Rings" /></div>
-            <div className="image-container"><img src={img8} alt="Picture of Rings" /></div>
-            <div className="image-container"><img src={img9} alt="Picture of Rings" /></div>
-            <div className="image-container"><img src={img10} alt="Picture of Rings" /></div>
+            <div className="image-container"><img src={img1} alt="Rings" /></div>
+            <div className="image-container"><img src={img2} alt="Rings" /></div>
+            <div className="image-container"><img src={img3} alt="Rings" /></div>
+            <div className="image-container"><img src={img4} alt="Rings" /></div>
+            <div className="image-container"><img src={img5} alt="Rings" /></div>
+            <div className="image-container"><img src={img6} alt="Rings" /></div>
+            <div className="image-container"><img src={img7} alt="Rings" /></div>
+            <div className="image-container"><img src={img8} alt="Rings" /></div>
+            <div className="image-container"><img src={img9} alt="Rings" /></div>
+            <div className="image-container"><img src={img10} alt="Rings" /></div>
         </div>
     );
 };

@@ -302,6 +302,16 @@ select, option, input {
     color: black;
 }
 
+.createCustom {
+    width: 100%;
+}
+
+.accordion, .accordion_item, .accordion_header, .accordion_button, .accordion_body {
+    color: #CCC;
+    background-color: #444;
+    border-color: #333;
+}
+
 @media only screen and (min-width: 1000px) {
     .about-container {
         flex-direction: row-reverse;
