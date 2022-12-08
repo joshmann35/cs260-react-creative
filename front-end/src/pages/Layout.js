@@ -2,6 +2,8 @@ import { Outlet, Link } from "react-router-dom";
 import Logo from "../../src/images/Asset_1.png";
 import React from "react";
 import { useLocation } from "react-router-dom";
+import "../../node_modules/jquery/dist/jquery.min.js";
+import "../../node_modules/bootstrap/dist/js/bootstrap.min.js";
 
 class Layout extends React.Component {
     
